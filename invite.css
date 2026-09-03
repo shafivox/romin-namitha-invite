@@ -1,0 +1,330 @@
+:root {
+  --ivory: #faf7f1;
+  --cream: #f1e8d8;
+  --paper: #fffdf9;
+  --ink: #2b2521;
+  --ink-soft: #4d453b;
+  --stone: #8c8171;
+  --stone-soft: #d8cebb;
+  --gold: #b08d57;
+  --gold-deep: #8f6f3e;
+  --gold-soft: #e3d1a4;
+  --shadow: rgba(43, 37, 30, 0.16);
+
+  --sage: #8fa37e;
+  --sage-deep: #6f8460;
+  --sage-soft: rgba(143, 163, 126, 0.22);
+  --dusty-blue: #a3b8c8;
+  --dusty-blue-soft: rgba(163, 184, 200, 0.28);
+
+  --serif: "Cormorant Garamond", Georgia, serif;
+  --script: "Great Vibes", "Cormorant Garamond", cursive;
+  --sans: "Montserrat", "Helvetica Neue", Arial, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  min-height: 100svh;
+  font-family: var(--sans);
+  color: var(--ink-soft);
+  background:
+    radial-gradient(ellipse 80% 50% at 50% -10%, rgba(176, 141, 87, 0.08), transparent 60%),
+    radial-gradient(ellipse 70% 55% at 92% 85%, var(--dusty-blue-soft), transparent 65%),
+    radial-gradient(ellipse 70% 55% at 5% 12%, var(--sage-soft), transparent 65%),
+    var(--ivory);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ===== Opening stage ===== */
+.opening {
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 20px;
+  overflow: hidden;
+}
+
+/* ===== Botanical corner decoration ===== */
+.botanicals {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+.botanicals svg {
+  position: absolute;
+  opacity: 0.55;
+}
+.botanicals .leaf--tl { top: -18px; left: -22px; width: 140px; height: 140px; transform: rotate(-8deg); }
+.botanicals .leaf--br { bottom: -22px; right: -20px; width: 160px; height: 160px; transform: rotate(174deg); }
+.botanicals .leaf--tr { top: -10px; right: -18px; width: 96px; height: 96px; transform: rotate(12deg) scaleX(-1); opacity: 0.4; }
+.botanicals .leaf--bl { bottom: -14px; left: -16px; width: 104px; height: 104px; transform: rotate(-165deg) scaleX(-1); opacity: 0.4; }
+
+.js-enabled .botanicals .leaf--tl,
+.js-enabled .botanicals .leaf--br,
+.js-enabled .botanicals .leaf--tr,
+.js-enabled .botanicals .leaf--bl {
+  animation: sway 9s ease-in-out infinite;
+}
+.js-enabled .botanicals .leaf--br { animation-duration: 11s; animation-delay: 0.6s; }
+.js-enabled .botanicals .leaf--tr { animation-duration: 10s; animation-delay: 1.2s; }
+.js-enabled .botanicals .leaf--bl { animation-duration: 12s; animation-delay: 0.3s; }
+
+@keyframes sway {
+  0%, 100% { transform: translate(0, 0) rotate(var(--r, 0deg)); }
+  50% { transform: translate(4px, -6px) rotate(calc(var(--r, 0deg) + 2deg)); }
+}
+.botanicals .leaf--tl { --r: -8deg; }
+.botanicals .leaf--br { --r: 174deg; }
+
+@media (prefers-reduced-motion: reduce) {
+  .js-enabled .botanicals svg { animation: none; }
+}
+
+@media (max-width: 480px) {
+  .botanicals .leaf--tl { width: 100px; height: 100px; }
+  .botanicals .leaf--br { width: 116px; height: 116px; }
+  .botanicals .leaf--tr, .botanicals .leaf--bl { width: 72px; height: 72px; }
+}
+
+/* ===== Envelope card ===== */
+.envelope {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 400px;
+  background: var(--paper);
+  border: 1px solid var(--sage-soft);
+  border-radius: 22px;
+  box-shadow: 0 40px 80px -40px var(--shadow);
+  padding: 54px 34px 40px;
+  text-align: center;
+  overflow: hidden;
+}
+
+.js-enabled .envelope {
+  opacity: 0;
+  transform: translateY(18px) scale(0.98);
+  animation: envelopeIn 1s cubic-bezier(0.2, 0.8, 0.2, 1) 0.15s forwards;
+}
+@keyframes envelopeIn {
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .js-enabled .envelope { opacity: 1; transform: none; animation: none; }
+}
+
+/* subtle folded-flap detail at the top of the card */
+.envelope__flap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 64px;
+  background: linear-gradient(180deg, var(--cream), transparent);
+  clip-path: polygon(0 0, 100% 0, 50% 78%);
+  pointer-events: none;
+}
+.envelope__flap::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 1px;
+  height: 46%;
+  background: linear-gradient(180deg, var(--gold-soft), transparent);
+  transform: translateX(-50%) rotate(0deg);
+  opacity: 0.7;
+}
+
+.envelope__body {
+  position: relative;
+}
+
+/* ===== Monogram emblem: N & R ===== */
+.monogram-emblem {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  width: 92px;
+  height: 92px;
+  margin: 0 auto 22px;
+  border: 1px solid var(--gold);
+  border-radius: 50%;
+  box-shadow: 0 0 0 6px rgba(176, 141, 87, 0.1);
+  font-family: var(--serif);
+  color: var(--ink);
+}
+.monogram-emblem__letter {
+  font-size: 1.75rem;
+  font-weight: 600;
+  line-height: 1;
+}
+.monogram-emblem__amp {
+  font-family: var(--script);
+  font-size: 1.35rem;
+  color: var(--sage-deep);
+  line-height: 1;
+}
+
+.eyebrow {
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.5em;
+  text-transform: uppercase;
+  color: var(--stone);
+  margin: 0 0 6px;
+  padding-left: 0.5em;
+}
+
+.opening__names {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-style: italic;
+  font-size: clamp(1.15rem, 5vw, 1.4rem);
+  color: var(--ink-soft);
+  margin: 0 0 20px;
+}
+
+.opening__divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin: 0 auto 20px;
+  max-width: 160px;
+}
+.opening__divider-line {
+  height: 1px;
+  flex: 1;
+  background: linear-gradient(90deg, transparent, var(--sage), transparent);
+}
+.opening__divider-leaf {
+  width: 6px;
+  height: 6px;
+  flex: 0 0 auto;
+  background: var(--sage);
+  transform: rotate(45deg);
+  box-shadow: 0 0 0 3px var(--sage-soft);
+}
+
+.opening__date {
+  font-family: var(--sans);
+  font-weight: 500;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  font-size: 0.74rem;
+  color: var(--stone);
+  margin: 0 0 32px;
+  padding-left: 0.3em;
+}
+
+/* ===== Open button ===== */
+.btn-open {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  min-height: 52px;
+  font-family: var(--sans);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ivory);
+  background: var(--sage-deep);
+  border: 1px solid var(--sage-deep);
+  border-radius: 12px;
+  cursor: pointer;
+  padding: 14px 28px;
+  transition: background 0.3s ease, transform 0.25s ease, box-shadow 0.3s ease;
+  box-shadow: 0 18px 34px -18px var(--shadow);
+  -webkit-tap-highlight-color: transparent;
+  white-space: nowrap;
+}
+.btn-open:hover {
+  background: var(--sage);
+  border-color: var(--sage);
+  transform: translateY(-2px);
+  box-shadow: 0 22px 40px -18px var(--shadow);
+}
+.btn-open:active {
+  transform: translateY(0);
+}
+.btn-open:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+}
+
+.btn-open__arrow {
+  transition: transform 0.3s ease;
+}
+.btn-open:hover .btn-open__arrow {
+  transform: translateX(3px);
+}
+
+/* ===== Leaving transition ===== */
+.js-enabled .opening.is-leaving .envelope {
+  transition: opacity 0.5s ease, transform 0.55s cubic-bezier(0.4, 0, 0.2, 1);
+  opacity: 0;
+  transform: translateY(-16px) scale(1.03);
+}
+.js-enabled .opening.is-leaving .btn-open {
+  transition: opacity 0.3s ease;
+  opacity: 0;
+}
+@media (prefers-reduced-motion: reduce) {
+  .js-enabled .opening.is-leaving .envelope,
+  .js-enabled .opening.is-leaving .btn-open {
+    transition: none;
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (max-width: 380px) {
+  .envelope { padding: 46px 24px 32px; border-radius: 18px; }
+  .monogram-emblem { width: 80px; height: 80px; margin-bottom: 18px; }
+  .monogram-emblem__letter { font-size: 1.5rem; }
+  .btn-open {
+    font-size: 0.66rem;
+    letter-spacing: 0.13em;
+    padding: 14px 16px;
+    gap: 6px;
+  }
+}
+
+@media (max-width: 340px) {
+  .envelope { padding: 40px 18px 28px; }
+  .btn-open { font-size: 0.6rem; letter-spacing: 0.09em; padding: 14px 10px; }
+}
+
+@media (max-height: 640px) {
+  .opening { padding: 20px 16px; }
+  .envelope { padding: 40px 30px 30px; }
+  .monogram-emblem { margin-bottom: 16px; }
+  .opening__date { margin-bottom: 22px; }
+}

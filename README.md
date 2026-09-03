@@ -1,9 +1,9 @@
-# Abin & Shilpa — Wedding Invitation
+# Romin & Namitha — Engagement Invitation
 
-An elegant single-page invitation for the wedding of **Abin Thomas** and **Shilpa Susan Mathew**.
+An elegant single-page invitation for the engagement of **Romin** and **Namitha**.
 
-- **When:** Saturday, 22 August 2026, 11:00 AM
-- **Where:** Little Flower Church, Elamkulam (reception after at the Parish Hall)
+- **When:** Saturday, 19 September 2026, 12:00 AM
+- **Where:** Stadium, Kozhikode
 
 ## Enable GitHub Pages
 

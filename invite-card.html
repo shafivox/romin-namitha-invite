@@ -7,16 +7,14 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Montserrat:wght@300;400;500;600&family=Great+Vibes&display=swap" rel="stylesheet" />
 <style>
   :root {
-    --blue: #3d5468;
-    --blue-deep: #2b3d4d;
-    --blue-mid: #6b8299;
-    --blue-soft: #a9bccd;
-    --gold: #bf9b48;
-    --gold-soft: #e0c883;
-    --ivory: #f6f4ef;
-    --ivory-warm: #ece7db;
-    --ink: #2e3a44;
-    --muted: #7d8a95;
+    --ivory: #faf7f1;
+    --cream: #f1e8d8;
+    --paper: #fffdf9;
+    --ink: #2b2521;
+    --ink-soft: #4d453b;
+    --stone: #8c8171;
+    --gold: #b08d57;
+    --gold-soft: #e3d1a4;
     --serif: "Cormorant Garamond", Georgia, serif;
     --script: "Great Vibes", cursive;
     --sans: "Montserrat", Arial, sans-serif;
@@ -25,10 +23,10 @@
   html, body { width: 1080px; height: 1440px; }
   body {
     font-family: var(--sans);
-    color: var(--ink);
+    color: var(--ink-soft);
     background:
-      radial-gradient(ellipse at 50% 0%, rgba(107, 130, 153, 0.30), transparent 55%),
-      radial-gradient(ellipse at 50% 100%, rgba(61, 84, 104, 0.12), transparent 55%),
+      radial-gradient(ellipse at 50% 0%, rgba(176, 141, 87, 0.14), transparent 55%),
+      radial-gradient(ellipse at 50% 100%, rgba(176, 141, 87, 0.08), transparent 55%),
       var(--ivory);
   }
   .card { width: 1080px; height: 1440px; padding: 30px; }
@@ -42,7 +40,7 @@
   .inner {
     width: 100%;
     height: 100%;
-    border: 1px solid rgba(191, 155, 72, 0.55);
+    border: 1px solid rgba(176, 141, 87, 0.5);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -54,23 +52,24 @@
     align-items: center;
     justify-content: center;
     gap: 6px;
-    width: 118px;
-    height: 118px;
+    width: 112px;
+    height: 112px;
     border: 1px solid var(--gold);
     border-radius: 50%;
-    color: var(--blue);
+    color: var(--ink);
     font-family: var(--script);
-    box-shadow: 0 0 0 7px rgba(191,155,72,0.14);
+    box-shadow: 0 0 0 7px rgba(176, 141, 87, 0.12);
     margin-bottom: 22px;
   }
-  .monogram span { font-size: 56px; line-height: 1; }
-  .monogram small { font-size: 26px; color: var(--gold); }
+  .monogram span { font-size: 52px; line-height: 1; }
+  .monogram small { font-size: 24px; color: var(--gold); }
   .eyebrow {
-    font-size: 20px;
-    letter-spacing: 0.42em;
+    font-size: 19px;
+    letter-spacing: 0.44em;
     text-transform: uppercase;
-    color: var(--blue-mid);
+    color: var(--stone);
     margin-bottom: 20px;
+    padding-left: 0.44em;
   }
   .names {
     display: flex;
@@ -81,14 +80,14 @@
   .names__name {
     font-family: var(--serif);
     font-weight: 600;
-    color: var(--blue);
-    font-size: 80px;
+    color: var(--ink);
+    font-size: 78px;
     line-height: 1.02;
     letter-spacing: 0.01em;
   }
   .names__amp {
     font-family: var(--script);
-    font-size: 62px;
+    font-size: 58px;
     color: var(--gold);
     line-height: 1;
     margin: 2px 0;
@@ -98,39 +97,75 @@
     align-items: center;
     justify-content: center;
     gap: 16px;
-    width: 320px;
+    width: 300px;
     margin: 24px 0 8px;
   }
   .divider__line { height: 1px; flex: 1; background: linear-gradient(90deg, transparent, var(--gold), transparent); }
-  .divider__diamond { width: 11px; height: 11px; background: var(--gold); transform: rotate(45deg); box-shadow: 0 0 0 4px rgba(191,155,72,0.2); }
+  .divider__diamond { width: 7px; height: 7px; background: var(--gold); transform: rotate(45deg); box-shadow: 0 0 0 4px rgba(176, 141, 87, 0.16); }
   .subtitle {
     font-family: var(--serif);
     font-style: italic;
-    font-size: 32px;
-    color: var(--ink);
+    font-size: 30px;
+    color: var(--ink-soft);
   }
   .photo {
     flex: 1;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
+    gap: 16px;
     width: 100%;
     min-height: 0;
-    margin: 6px 0 4px;
+    margin: 22px 0 6px;
   }
-  .photo img {
-    max-height: 430px;
-    max-width: 76%;
-    object-fit: contain;
-    -webkit-mask-image: linear-gradient(to bottom, #000 88%, rgba(0,0,0,0) 100%);
-    mask-image: linear-gradient(to bottom, #000 88%, rgba(0,0,0,0) 100%);
+  .photo-frame {
+    height: 100%;
+    max-height: 380px;
+    aspect-ratio: 3 / 4;
+    border-radius: 130px 130px 16px 16px;
+    overflow: hidden;
+    background: var(--cream);
+    border: 1px solid var(--gold-soft);
+    box-shadow: 0 30px 60px -30px rgba(43, 37, 30, 0.28);
   }
+  .photo-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+  }
+  .photo-thumbs {
+    display: flex;
+    gap: 14px;
+    justify-content: center;
+    width: 100%;
+    max-width: 460px;
+  }
+  .photo-thumb {
+    flex: 1;
+    height: 110px;
+    border-radius: 14px;
+    overflow: hidden;
+    background: var(--cream);
+    border: 1px solid var(--gold-soft);
+    box-shadow: 0 14px 30px -18px rgba(43, 37, 30, 0.3);
+  }
+  .photo-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .photo-thumb:nth-of-type(1) img { object-position: center 42%; }
+  .photo-thumb:nth-of-type(2) img { object-position: center 24%; }
+  .photo-thumb:nth-of-type(3) img { object-position: center 38%; }
+  .photo-thumb:nth-of-type(4) img { object-position: center 78%; }
   .details {
     display: flex;
     align-items: stretch;
     justify-content: center;
     gap: 44px;
-    margin-top: 4px;
+    margin-top: 8px;
   }
   .details__col { flex: 0 0 300px; width: 300px; }
   .details__sep { width: 1px; background: linear-gradient(var(--gold), transparent, var(--gold)); }
@@ -143,12 +178,12 @@
     font-size: 22px;
     margin-bottom: 8px;
   }
-  .details__text { font-family: var(--serif); font-size: 27px; line-height: 1.42; color: var(--ink); }
-  .details__text strong { color: var(--blue); font-weight: 600; }
+  .details__text { font-family: var(--serif); font-size: 27px; line-height: 1.42; color: var(--ink-soft); }
+  .details__text strong { color: var(--ink); font-weight: 600; }
   .footer {
-    margin-top: 28px;
+    margin-top: 26px;
     font-family: var(--script);
-    font-size: 40px;
+    font-size: 38px;
     color: var(--gold);
   }
 </style>
@@ -157,13 +192,13 @@
   <div class="card">
     <div class="frame">
       <div class="inner">
-        <div class="monogram"><span>A</span><small>&amp;</small><span>S</span></div>
-        <p class="eyebrow">Together with their families</p>
+        <div class="monogram"><span>R</span><small>&amp;</small><span>N</span></div>
+        <p class="eyebrow">Engagement</p>
 
         <div class="names">
-          <div class="names__name">Abin Thomas</div>
+          <div class="names__name">Romin</div>
           <span class="names__amp">&amp;</span>
-          <div class="names__name">Shilpa Susan Mathew</div>
+          <div class="names__name">Namitha</div>
         </div>
 
         <div class="divider">
@@ -171,23 +206,33 @@
           <span class="divider__diamond"></span>
           <span class="divider__line"></span>
         </div>
-        <p class="subtitle">invite you to celebrate their wedding</p>
+        <p class="subtitle">invite you to celebrate their engagement</p>
 
-        <div class="photo"><img src="couple-hero.png" alt="" /></div>
+        <div class="photo">
+          <div class="photo-frame">
+            <img src="couple-hero.png?v=20260919" alt="Romin and Namitha together" />
+          </div>
+          <div class="photo-thumbs">
+            <div class="photo-thumb"><img src="./side.jpeg" alt="Romin and Namitha engagement photo" /></div>
+            <div class="photo-thumb"><img src="./side2.jpeg" alt="Romin and Namitha engagement photo" /></div>
+            <div class="photo-thumb"><img src="./side3.jpeg" alt="Romin and Namitha engagement photo" /></div>
+            <div class="photo-thumb"><img src="./side4.jpeg" alt="Romin and Namitha engagement photo" /></div>
+          </div>
+        </div>
 
         <div class="details">
           <div class="details__col">
             <div class="details__label">When</div>
-            <div class="details__text">Saturday<br /><strong>22 August 2026</strong><br />11:00 AM</div>
+            <div class="details__text">Saturday<br /><strong>19 September 2026</strong><br />4:00 PM</div>
           </div>
           <div class="details__sep"></div>
           <div class="details__col">
             <div class="details__label">Where</div>
-            <div class="details__text"><strong>Little Flower Church</strong><br />Elamkulam<br />Reception to follow</div>
+            <div class="details__text"><strong>Staydium Bungalow Resort</strong><br />Kozhikode<br />Join us for the celebration</div>
           </div>
         </div>
 
-        <p class="footer">Can't wait to celebrate with you</p>
+        <p class="footer">With love, we invite you to celebrate with us</p>
       </div>
     </div>
   </div>
