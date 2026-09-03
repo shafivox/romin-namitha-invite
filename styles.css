@@ -187,28 +187,6 @@ img { max-width: 100%; display: block; }
   .hero__photo img { animation: none; }
 }
 
-.hero__scroll {
-  margin: 44px 0 0;
-  font-size: 0.68rem;
-  letter-spacing: 0.3em;
-  text-transform: uppercase;
-  color: var(--stone);
-  position: relative;
-}
-.hero__scroll::after {
-  content: "";
-  display: block;
-  width: 1px;
-  height: 34px;
-  margin: 12px auto 0;
-  background: linear-gradient(var(--gold), transparent);
-  animation: scrollPulse 2.4s ease-in-out infinite;
-}
-@keyframes scrollPulse {
-  0%, 100% { opacity: 0.3; transform: scaleY(0.6); }
-  50% { opacity: 1; transform: scaleY(1); }
-}
-
 /* ===== Sections ===== */
 .section {
   max-width: 720px;
@@ -294,7 +272,7 @@ img { max-width: 100%; display: block; }
 .event-card__row {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   gap: 12px;
   margin-top: 18px;
 }
