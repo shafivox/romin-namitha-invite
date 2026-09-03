@@ -15,7 +15,7 @@
     // modern JS engine (V8/Chrome, SpiderMonkey/Firefox, JavaScriptCore/Safari),
     // so the target instant does not depend on the browser or visitor's
     // local timezone.
-    var target = new Date("2026-09-19T16:00:00+05:30").getTime();
+    var target = new Date("2026-09-19T17:00:00+05:30").getTime();
 
     if (isNaN(target)) {
       throw new Error("Countdown target date failed to parse");
@@ -73,7 +73,7 @@
     if (fallbackGrid) fallbackGrid.hidden = true;
     if (fallbackDone) {
       fallbackDone.hidden = false;
-      fallbackDone.textContent = "19 September 2026 · 4:00 PM IST";
+      fallbackDone.textContent = "Saturday, 19 September 2026 · 5:00 PM IST";
     }
   }
 
