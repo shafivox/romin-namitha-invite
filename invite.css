@@ -175,17 +175,16 @@ body {
   border-radius: 50%;
   box-shadow: 0 0 0 6px rgba(176, 141, 87, 0.1);
   font-family: var(--serif);
-  color: var(--ink);
+  font-style: italic;
+  font-weight: 500;
+  color: var(--ink-soft);
 }
 .monogram-emblem__letter {
   font-size: 1.75rem;
-  font-weight: 600;
   line-height: 1;
 }
 .monogram-emblem__amp {
-  font-family: var(--script);
-  font-size: 1.35rem;
-  color: var(--sage-deep);
+  font-size: 1.5rem;
   line-height: 1;
 }
 

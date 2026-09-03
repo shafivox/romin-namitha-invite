@@ -1,7 +1,7 @@
 (function () {
   document.documentElement.classList.add('js-enabled');
 
-  var DESTINATION = 'index.html';
+  var DESTINATION = 'main.html';
   var openBtn = document.getElementById('open-btn');
   var opening = document.getElementById('opening');
   var hasNavigated = false;

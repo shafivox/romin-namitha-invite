@@ -73,7 +73,7 @@
     if (fallbackGrid) fallbackGrid.hidden = true;
     if (fallbackDone) {
       fallbackDone.hidden = false;
-      fallbackDone.textContent = "Saturday, 19 September 2026 · 5:00 PM IST";
+      fallbackDone.textContent = "Saturday, 19 September 2026 · 5:00 pm IST";
     }
   }
 
@@ -160,6 +160,65 @@
       petal.style.opacity = 0.35 + Math.random() * 0.4;
       petalsWrap.appendChild(petal);
     }
+  }
+
+  // ===== Gallery slider =====
+  // Isolated in its own try/catch: progressive enhancement only. The track
+  // is a native scroll-snap container, so swiping already works without
+  // this; it just wires up the prev/next arrows and the dot indicators.
+  try {
+    var track = document.getElementById("gallery-track");
+    var prevBtn = document.getElementById("gallery-prev");
+    var nextBtn = document.getElementById("gallery-next");
+    var dots = Array.prototype.slice.call(document.querySelectorAll(".gallery__dot"));
+
+    if (track && track.children.length && dots.length) {
+      var activeIndex = function () {
+        var i = dots.findIndex(function (d) { return d.classList.contains("is-active"); });
+        return i === -1 ? 0 : i;
+      };
+
+      var goTo = function (index) {
+        var slide = track.children[Math.max(0, Math.min(track.children.length - 1, index))];
+        if (slide) slide.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
+      };
+
+      var syncDots = function () {
+        var trackRect = track.getBoundingClientRect();
+        var center = trackRect.left + trackRect.width / 2;
+        var closest = 0;
+        var closestDist = Infinity;
+        Array.prototype.forEach.call(track.children, function (slide, i) {
+          var rect = slide.getBoundingClientRect();
+          var dist = Math.abs(rect.left + rect.width / 2 - center);
+          if (dist < closestDist) {
+            closestDist = dist;
+            closest = i;
+          }
+        });
+        dots.forEach(function (dot, i) {
+          dot.classList.toggle("is-active", i === closest);
+        });
+      };
+
+      if (prevBtn) prevBtn.addEventListener("click", function () { goTo(activeIndex() - 1); });
+      if (nextBtn) nextBtn.addEventListener("click", function () { goTo(activeIndex() + 1); });
+      dots.forEach(function (dot, i) {
+        dot.addEventListener("click", function () { goTo(i); });
+      });
+
+      var syncTimer;
+      track.addEventListener(
+        "scroll",
+        function () {
+          clearTimeout(syncTimer);
+          syncTimer = setTimeout(syncDots, 80);
+        },
+        { passive: true }
+      );
+    }
+  } catch (sliderError) {
+    // Gallery slider is progressive enhancement only; ignore failures.
   }
 
   // ===== Gallery lightbox =====
